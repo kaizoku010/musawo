@@ -1,0 +1,117 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    --primary: 210 100% 50%;
+    --primary-foreground: 210 40% 98%;
+    
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 84% 48%;
+    
+    --radius: 0.75rem;
+    
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 33% 17%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 33% 17%;
+    --sidebar-ring: 224 76% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  /* Smooth scroll and prevent horizontal overflow */
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/20 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+  
+  /* Glass morphism utility classes */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-black/30 backdrop-blur-md border border-white/10;
+  }
+  
+  /* Page transition classes */
+  .page-enter {
+    @apply opacity-0;
+  }
+  
+  .page-enter-active {
+    @apply opacity-100 transition-opacity duration-300;
+  }
+  
+  .page-exit {
+    @apply opacity-100;
+  }
+  
+  .page-exit-active {
+    @apply opacity-0 transition-opacity duration-300;
+  }
+  
+  /* Hover effect for cards */
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+  
+  .hover-lift:hover {
+    @apply transform -translate-y-1 shadow-lg;
+  }
+}

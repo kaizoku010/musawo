@@ -1,0 +1,15 @@
+#product-form-group{
+    background-color: red;
+    display: flex;
+    gap: 1;
+    flex-direction: column;
+}
+
+#form-holder{
+    display: flex;
+}
+
+#product-form-main{
+    background-color: blue;
+    /* max-width: 100px; */
+}

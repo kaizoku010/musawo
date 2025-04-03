@@ -1,0 +1,16 @@
+#product-form-group{
+    /* background-color: red; */
+    display: flex;
+
+    flex-direction: column;
+}
+
+#form-holder{
+    display: flex;
+    gap: 1rem;
+}
+
+#product-form-main{
+    /* background-color: blue; */
+width: 60rem;
+}
