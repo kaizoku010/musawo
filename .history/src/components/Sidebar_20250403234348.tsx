@@ -23,46 +23,26 @@ interface SidebarProps {
 interface SidebarItemProps {
   icon: React.ReactNode;
   title: string;
-  href?: string; // Make href optional
+  href: string;
   active?: boolean;
   collapsed?: boolean;
   onClick?: () => void;
 }
 
-const SidebarItem = ({ icon, title, href, active = false, collapsed = false, onClick }: SidebarItemProps) => {
-  // If no href is provided, render just the button
-  if (!href) {
-    return (
-      <Button
-        variant="ghost"
-        className={cn(
-          "w-full justify-start gap-x-2 my-1",
-          active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "hover:bg-sidebar-accent/50 text-sidebar-foreground"
-        )}
-        onClick={onClick}
-      >
-        {icon}
-        {!collapsed && <span>{title}</span>}
-      </Button>
-    );
-  }
-
-  // If href is provided, wrap with Link
-  return (
-    <Link to={href} onClick={onClick}>
-      <Button
-        variant="ghost"
-        className={cn(
-          "w-full justify-start gap-x-2 my-1",
-          active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "hover:bg-sidebar-accent/50 text-sidebar-foreground"
-        )}
-      >
-        {icon}
-        {!collapsed && <span>{title}</span>}
-      </Button>
-    </Link>
-  );
-};
+const SidebarItem = ({ icon, title, href, active = false, collapsed = false, onClick }: SidebarItemProps) => (
+  <Link to={href} onClick={onClick}>
+    <Button
+      variant="ghost"
+      className={cn(
+        "w-full justify-start gap-x-2 my-1",
+        active ? "bg-sidebar-accent text-sidebar-accent-foreground" : "hover:bg-sidebar-accent/50 text-sidebar-foreground"
+      )}
+    >
+      {icon}
+      {!collapsed && <span>{title}</span>}
+    </Button>
+  </Link>
+);
 
 const Sidebar: React.FC<SidebarProps> = ({ className }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -88,7 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
     {
       icon: <BarChartBig size={20} />,
       title: 'Analytics',
-      // href: '/analytics', // This is now valid since href is optional
+      // href: '/analytics',
     },
     {
       icon: <Settings size={20} />,
@@ -127,7 +107,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
                 key={item.href}
                 icon={item.icon}
                 title={item.title}
-                href={item.href}
+                href={item.href instanceof any ? item.href : "/"}
                 active={location.pathname === item.href}
                 collapsed={collapsed}
               />
@@ -162,4 +142,3 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
 };
 
 export default Sidebar;
-

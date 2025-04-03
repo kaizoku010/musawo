@@ -144,7 +144,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
               </Avatar>
               {!collapsed && (
                 <div className="flex flex-col">
-                  <span className="text-xs font-medium text-sidebar-foreground">{"MUSAWO"}</span>
+                  <span className="text-xs font-medium text-sidebar-foreground">{""}</span>
                   <span className="text-xs text-sidebar-foreground/60">{user?.email}</span>
                 </div>
               )}
