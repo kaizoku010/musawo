@@ -10,32 +10,55 @@ import { formatDistanceToNow } from 'date-fns';
 import { DollarSign, Users, ShoppingBag, TrendingUp } from 'lucide-react';
 import type { Column } from '@/components/DataTable';
 
+// Add these interfaces
+interface Sale {
+  productName: string;
+  customerName: string;
+  date: Date;
+  amount: number;
+}
+
+interface Product {
+  name: string;
+  sales: number;
+}
+
+interface Stats {
+  totalRevenue: number;
+  totalSales: number;
+  totalUsers: number;
+  totalProducts: number;
+  salesByMonth: Array<{ month: string; sales: number }>;
+  topProducts: Product[];
+  recentSales: Sale[];
+}
+
 const Dashboard = () => {
   const { stats, isLoading } = useMockData();
 
   // Sale table columns
-  const columns = [
+  const columns: Column<Sale>[] = [
     {
       header: 'Product',
-      accessorKey: 'productName' as const,
+      accessorKey: 'productName',
     },
     {
       header: 'Customer',
-      accessorKey: 'customerName' as const,
+      accessorKey: 'customerName',
     },
     {
       header: 'Date',
-      accessorKey: 'date' as const,
-      cell: (sale: { date: Date }) => (
-        <span>{formatDistanceToNow(new Date(sale.date), { addSuffix: true })}</span>
+      accessorKey: 'date',
+      cell: ({ row }) => (
+        <span>{formatDistanceToNow(new Date(row.original.date), { addSuffix: true })}</span>
       ),
     },
     {
       header: 'Amount',
-      accessorKey: 'amount' as const,
-      cell: (sale: { amount: number }) => (
+      accessorKey: 'amount',
+      cell: ({ row }) => (
         <span className="font-medium">
-          ${sale.amount.toLocaleString()}
+          ${row.original.amount.toLocaleString()}
         </span>
       ),
     },
@@ -143,12 +166,12 @@ const Dashboard = () => {
             <CardDescription>Latest transactions across your store</CardDescription>
           </CardHeader>
           <CardContent>
-            {/* <DataTable
+            <DataTable
               data={stats?.recentSales || []}
-              // columns={columns as Column<Sale>[]}
-                            loading={isLoading}
+              columns={columns}
+              loading={isLoading}
               pagination={false}
-            /> */}
+            />
           </CardContent>
         </Card>
       </div>
@@ -157,4 +180,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
 

@@ -29,6 +29,19 @@ export const auth = {
     }
   },
 
+  validate: async () => {
+    try {
+      const token = localStorage.getItem('admin_token');
+      const response = await api.get('/auth/validate', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      return response;
+    } catch (error) {
+      console.error('Validation failed:', error);
+      throw error;
+    }
+  },
+
   logout: () => {
     localStorage.removeItem('admin_token');
     localStorage.removeItem('user');
@@ -165,6 +178,7 @@ export const orderService = {
 };
 
 export default api;
+
 
 
 

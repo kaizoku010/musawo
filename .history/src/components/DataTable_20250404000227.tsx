@@ -189,7 +189,7 @@ export function DataTable<T>({
                   {columns.map((column) => (
                     <TableCell key={column.accessorKey.toString()}>
                       {column.cell
-                        ? column.cell({ row: { original: item } })
+                        ? column.cell(item)
                         : (item[column.accessorKey] as React.ReactNode)}
                     </TableCell>
                   ))}
@@ -249,5 +249,4 @@ export function DataTable<T>({
     </div>
   );
 }
-
 

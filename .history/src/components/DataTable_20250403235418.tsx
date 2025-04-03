@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 export interface Column<T> {
   header: string;
   accessorKey: keyof T;
-  cell?: ({ row }: { row: { original: T } }) => React.ReactNode;
+  cell?: (item: T) => React.ReactNode;
   sortable?: boolean;
 }
 
@@ -189,7 +189,7 @@ export function DataTable<T>({
                   {columns.map((column) => (
                     <TableCell key={column.accessorKey.toString()}>
                       {column.cell
-                        ? column.cell({ row: { original: item } })
+                        ? column.cell(item)
                         : (item[column.accessorKey] as React.ReactNode)}
                     </TableCell>
                   ))}
@@ -249,5 +249,3 @@ export function DataTable<T>({
     </div>
   );
 }
-
-

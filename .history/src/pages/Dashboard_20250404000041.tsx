@@ -143,12 +143,12 @@ const Dashboard = () => {
             <CardDescription>Latest transactions across your store</CardDescription>
           </CardHeader>
           <CardContent>
-            {/* <DataTable
+            <DataTable
               data={stats?.recentSales || []}
               // columns={columns as Column<Sale>[]}
                             loading={isLoading}
               pagination={false}
-            /> */}
+            />
           </CardContent>
         </Card>
       </div>

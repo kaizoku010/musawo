@@ -8,7 +8,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useMockData } from '@/hooks/useMockData';
 import { formatDistanceToNow } from 'date-fns';
 import { DollarSign, Users, ShoppingBag, TrendingUp } from 'lucide-react';
-import type { Column } from '@/components/DataTable';
 
 const Dashboard = () => {
   const { stats, isLoading } = useMockData();
@@ -143,12 +142,12 @@ const Dashboard = () => {
             <CardDescription>Latest transactions across your store</CardDescription>
           </CardHeader>
           <CardContent>
-            {/* <DataTable
+            <DataTable
               data={stats?.recentSales || []}
-              // columns={columns as Column<Sale>[]}
-                            loading={isLoading}
+              columns={columns}
+              loading={isLoading}
               pagination={false}
-            /> */}
+            />
           </CardContent>
         </Card>
       </div>

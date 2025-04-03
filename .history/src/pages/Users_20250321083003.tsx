@@ -67,7 +67,12 @@ const Users = () => {
 
         <Card>
           <CardContent className="p-6">
-    
+            <DataTable
+              data={users}
+              columns={columns}
+              searchKey="name"
+              loading={isLoading}
+            />
           </CardContent>
         </Card>
       </div>

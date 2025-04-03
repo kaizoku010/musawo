@@ -1,6 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
+// Extend Express Request type
+declare global {
+  namespace Express {
+    interface Request {
+      user?: {
+        role: string;
+        id?: string;
+        email?: string;
+      };
+    }
+  }
+}
+
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 export const generateToken = (user: any) => {
@@ -13,7 +26,7 @@ export const generateToken = (user: any) => {
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   // Temporarily bypass token verification
-  req.user = { role: 'admin' }; // Give admin access
+  req.user = { role: 'admin' }; // Now TypeScript knows about req.user
   next();
 };
 
@@ -32,3 +45,4 @@ export const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 };
+
